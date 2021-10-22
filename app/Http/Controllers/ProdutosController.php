@@ -17,7 +17,7 @@ class ProdutosController extends Controller
 
     public function show($id)
     {
-        $result = Produtos::find($id);
+        $result = Produtos::find($id)->get();
 
         if (!$result) {
             return response()->json([
