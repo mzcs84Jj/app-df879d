@@ -62,7 +62,8 @@ class ProdutosController extends Controller
                 ], 401);
             }
     
-            $produto->fill($request->all());
+            $produto->nome = $request->nome;
+            $produto->qtd = $request->qtd;
             $produto->save();
 
             return response()->json([
