@@ -1,0 +1,333 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Appmax API Documentation",
+        "version": "0.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api"
+        }
+    ],
+    "paths": {
+        "/movimentacao": {
+            "get": {
+                "tags": [
+                    "/movimentacao"
+                ],
+                "summary": "Retorna o histórico das movimentações",
+                "description": "Retorna um objeto com o histórico das movimentações",
+                "operationId": "2aa224745b5d5d5fe2a9047d6fd5cdd6",
+                "responses": {
+                    "200": {
+                        "description": "Histórico de movimentações"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "/movimentacao"
+                ],
+                "summary": "Insere uma movimentação",
+                "description": "Insere uma movimentação",
+                "operationId": "4518462ebd9032c57a2c2528e730e7d2",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "sku": {
+                                        "type": "string"
+                                    },
+                                    "qtd": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Movimentação inserida com sucesso"
+                    },
+                    "401": {
+                        "description": "Produto não encontrado"
+                    }
+                }
+            }
+        },
+        "/movimentacao/{id}": {
+            "get": {
+                "tags": [
+                    "/movimentacao"
+                ],
+                "summary": "Retorna uma movimentação especifica",
+                "description": "Retorna os dados de uma movimentação especifica",
+                "operationId": "8da289e9fbc6b2cf982b02b23244e269",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id da movimentação",
+                        "required": false,
+                        "schema": {
+                            "type": "bigint"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados da movimentação"
+                    },
+                    "401": {
+                        "description": "Movimentação não encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "/movimentacao"
+                ],
+                "summary": "Atualiza uma movimentação",
+                "description": "Atualiza uma movimentação",
+                "operationId": "19a4dcbec4aca47833e228ca5a543162",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "sku": {
+                                        "type": "string"
+                                    },
+                                    "qtd": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Movimentação atualizada com sucesso"
+                    },
+                    "401": {
+                        "description": "Movimentação ou Produto não encontrados"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "/movimentacao"
+                ],
+                "summary": "Exclui uma movimentação",
+                "description": "Exclui uma movimentação",
+                "operationId": "486c46d21de36b32f0fff302ca0cff3e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id da movimentação",
+                        "required": false,
+                        "schema": {
+                            "type": "bigint"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Movimentação excluida com sucesso"
+                    },
+                    "401": {
+                        "description": "Movimentação não encontrada"
+                    }
+                }
+            }
+        },
+        "/movimentacao/sku/{sku}": {
+            "get": {
+                "tags": [
+                    "/movimentacao"
+                ],
+                "summary": "Retorna as movimentações de um produto",
+                "description": "Retorna as movimentações de um produto",
+                "operationId": "78f23b94c7d7172ede046b42315d73ba",
+                "parameters": [
+                    {
+                        "name": "sku",
+                        "in": "path",
+                        "description": "SKU",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Todas movimentações de um produto"
+                    },
+                    "401": {
+                        "description": "Produto não encontrado"
+                    }
+                }
+            }
+        },
+        "/produtos": {
+            "get": {
+                "tags": [
+                    "/produtos"
+                ],
+                "summary": "Retorna todos os produtos",
+                "description": "Retorna um objeto com todos os produtos",
+                "operationId": "6c7e01f374ecc51c7235ae807f35a2db",
+                "responses": {
+                    "200": {
+                        "description": "Lista de produtos"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "/produtos"
+                ],
+                "summary": "Insere um produto",
+                "description": "Insere um produto",
+                "operationId": "1424635ae63d2f11628c1b8db631d813",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "sku": {
+                                        "type": "string"
+                                    },
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "qtd": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Produto inserido com sucesso"
+                    }
+                }
+            }
+        },
+        "/produtos/{sku}": {
+            "get": {
+                "tags": [
+                    "/produtos"
+                ],
+                "summary": "Retorna um produto especifico",
+                "description": "Retorna os dados de um produto especifico",
+                "operationId": "0abb50201e6010133bc3b69a35d884eb",
+                "parameters": [
+                    {
+                        "name": "sku",
+                        "in": "path",
+                        "description": "SKU do produto",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados do produto"
+                    },
+                    "401": {
+                        "description": "Produto não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "/produtos"
+                ],
+                "summary": "Atualiza um produto",
+                "description": "Atualiza um produto",
+                "operationId": "77390f48cc692c2ffbad0f282bc0556e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "sku": {
+                                        "type": "string"
+                                    },
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "qtd": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Produto atualizado com sucesso"
+                    },
+                    "401": {
+                        "description": "Produto não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "/produtos"
+                ],
+                "summary": "Exclui um produto",
+                "description": "Exclui um produto",
+                "operationId": "ef5a3e54d41e7336aeb123ed82a45d1c",
+                "parameters": [
+                    {
+                        "name": "sku",
+                        "in": "path",
+                        "description": "SKU do produto",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produto excluido com sucesso"
+                    },
+                    "401": {
+                        "description": "Produto não encontrado"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
