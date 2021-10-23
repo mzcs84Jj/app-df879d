@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
 {
+    /**
+     * @OA\Get(
+     *      tags={"/produtos"},
+     *      summary="Retorna todos os produtos",
+     *      description="Retorna um objeto com todos os produtos",
+     *      path="/produtos",
+     *      @OA\Response(
+     *          response="200", description="Lista de produtos"
+     *      )
+     * )
+     */       
     public function index()
     {
         $result = Produtos::select('sku', 'nome', 'qtd')
@@ -15,6 +26,29 @@ class ProdutosController extends Controller
         return response()->json($result);
     }    
 
+    /**
+     * @OA\Get(
+     *      tags={"/produtos"},
+     *      summary="Retorna um produto especifico",
+     *      description="Retorna os dados de um produto especifico",
+     *      path="/produtos/{sku}",
+     *      @OA\Parameter(
+     *          name="sku",
+     *          in="path",
+     *          description="SKU do produto",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="200", description="Dados do produto"
+     *      ),
+     *      @OA\Response(
+     *          response="401", description="Produto não encontrado"
+     *      )
+     * )
+     */    
     public function show($sku)
     {
         $result = Produtos::find($sku);
@@ -29,6 +63,26 @@ class ProdutosController extends Controller
         return response()->json($result);
     }    
 
+     /**
+     * @OA\Post(
+     *      tags={"/produtos"},
+     *      summary="Insere um produto",
+     *      description="Insere um produto",
+     *      path="/produtos",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="sku", type="string"),
+     *              @OA\Property(property="nome", type="string"),
+     *              @OA\Property(property="qtd", type="integer"), 
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response="200", description="Produto inserido com sucesso"
+     *      ),
+     * )
+     */        
     public function store(Request $request)
     {
         try {
@@ -50,6 +104,29 @@ class ProdutosController extends Controller
         }
     }    
 
+     /**
+     * @OA\Put(
+     *      tags={"/produtos"},
+     *      summary="Atualiza um produto",
+     *      description="Atualiza um produto",
+     *      path="/produtos/{sku}",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="sku", type="string"),
+     *              @OA\Property(property="nome", type="string"),
+     *              @OA\Property(property="qtd", type="integer"), 
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response="200", description="Produto atualizado com sucesso"
+     *      ),
+     *      @OA\Response(
+     *          response="401", description="Produto não encontrado"
+     *      ),
+     * )
+     */       
     public function update(Request $request, $sku)
     {
         try {
@@ -79,6 +156,29 @@ class ProdutosController extends Controller
         }
     }    
 
+    /**
+     * @OA\Delete(
+     *      tags={"/produtos"},
+     *      summary="Exclui um produto",
+     *      description="Exclui um produto",
+     *      path="/produtos/{sku}",
+     *      @OA\Parameter(
+     *          name="sku",
+     *          in="path",
+     *          description="SKU do produto",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="200", description="Produto excluido com sucesso"
+     *      ),
+     *      @OA\Response(
+     *          response="401", description="Produto não encontrado"
+     *      ),
+     * )
+     */     
     public function destroy($sku)
     {
         try{
