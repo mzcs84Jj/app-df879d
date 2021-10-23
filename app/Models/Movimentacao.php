@@ -11,4 +11,9 @@ class Movimentacao extends Model
         'sku',
         'qtd',
     ];
+
+    public function produtos()
+    {
+        return $this->belongsTo(Produtos::class, 'sku');
+    }    
 }

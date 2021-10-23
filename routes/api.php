@@ -35,4 +35,5 @@ Route::prefix('movimentacao')->group(function(){
     Route::post('/',[MovimentacaoController::class, 'store']);
     Route::put('/{id}',[MovimentacaoController::class, 'update']);
     Route::delete('/{id}',[MovimentacaoController::class, 'destroy']);
+    Route::get('/estoque/{sku}',[MovimentacaoController::class, 'getEstoqueAtual']);
 });
