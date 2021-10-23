@@ -9,15 +9,15 @@ class ProdutosController extends Controller
 {
     public function index()
     {
-        $result = Produtos::select('id', 'nome', 'sku', 'qtd')
+        $result = Produtos::select('sku', 'nome', 'qtd')
             ->get();
 
         return response()->json($result);
     }    
 
-    public function show($id)
+    public function show($sku)
     {
-        $result = Produtos::find($id)->get();
+        $result = Produtos::find($sku);
 
         if (!$result) {
             return response()->json([
@@ -50,10 +50,10 @@ class ProdutosController extends Controller
         }
     }    
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $sku)
     {
         try {
-            $produto = Produtos::find($id);
+            $produto = Produtos::find($sku);
 
             if (!$produto) {
                 return response()->json([
@@ -78,10 +78,10 @@ class ProdutosController extends Controller
         }
     }    
 
-    public function destroy($id)
+    public function destroy($sku)
     {
         try{
-            $produto = Produtos::find($id);
+            $produto = Produtos::find($sku);
             if (!$produto) {
                 return response()->json([
                     'error' => true,

@@ -14,11 +14,12 @@ class CreateTableProdutos extends Migration
     public function up()
     {
         Schema::create('produtos', function (Blueprint $table) {
-            $table->id();
+            $table->string('sku', 15)->unique();
             $table->string('nome', 50);
-            $table->string('sku', 10);
             $table->integer('qtd');
             $table->timestamps();
+
+            $table->primary('sku');
         });
     }
 

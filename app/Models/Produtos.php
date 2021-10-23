@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Produtos extends Model
 {
-    protected $fillable = [
-        'nome',
+    protected $primaryKey = 'sku';
+    public $incrementing = false;
+    public $fillable = [
         'sku',
+        'nome',
         'qtd',
     ];
 }
