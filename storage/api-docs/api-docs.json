@@ -184,6 +184,32 @@
                 }
             }
         },
+        "/movimentacao/estoque/{sku}": {
+            "get": {
+                "tags": [
+                    "/movimentacao"
+                ],
+                "summary": "Retorna o estoque atual de um produto",
+                "description": "Retorna o estoque atual de um produto baseado nas movimentações",
+                "operationId": "f3fc90a90aa97c1d48831bc9e35a04b2",
+                "parameters": [
+                    {
+                        "name": "sku",
+                        "in": "path",
+                        "description": "SKU",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Estoque atual do produto"
+                    }
+                }
+            }
+        },
         "/produtos": {
             "get": {
                 "tags": [
