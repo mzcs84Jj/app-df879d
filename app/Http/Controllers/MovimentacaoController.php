@@ -268,6 +268,26 @@ class MovimentacaoController extends Controller
         return response()->json($result);
     }      
 
+    /**
+     * @OA\Get(
+     *      tags={"/movimentacao"},
+     *      summary="Retorna o estoque atual de um produto",
+     *      description="Retorna o estoque atual de um produto baseado nas movimentações",
+     *      path="/movimentacao/estoque/{sku}",
+     *      @OA\Parameter(
+     *          name="sku",
+     *          in="path",
+     *          description="SKU",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="200", description="Estoque atual do produto"
+     *      ),
+     * )
+     */       
     public function getEstoqueAtual($sku)
     {
         $result = Movimentacao::select(
