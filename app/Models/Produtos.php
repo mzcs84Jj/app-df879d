@@ -13,4 +13,9 @@ class Produtos extends Model
         'nome',
         'qtd',
     ];
+
+    public function movimentacao()
+    {
+        return $this->hasMany(Movimentacao::class, 'sku');
+    }        
 }

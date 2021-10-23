@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Produtos;
 use App\Models\Movimentacao;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MovimentacaoController extends Controller
 {
@@ -21,7 +22,7 @@ class MovimentacaoController extends Controller
      */    
     public function index()
     {
-        $result = Movimentacao::select('*')
+        $result = Movimentacao::select('sku', 'qtd', 'created_at')
             ->get();
 
         return response()->json($result);
@@ -260,10 +261,25 @@ class MovimentacaoController extends Controller
             ], 401);
         }
         
-        $result = Movimentacao::select('*')
-            ->where('sku', $sku)
+        $result = Produtos::with('movimentacao')
+            ->where('produtos.sku', $sku)
             ->get();
 
         return response()->json($result);
     }      
+
+    public function getEstoqueAtual($sku)
+    {
+        $result = Movimentacao::select(
+            'movimentacao.sku',
+            DB::raw('produtos.qtd + SUM(movimentacao.qtd) AS estoque')
+        )
+            ->join('produtos', function ($join) {
+                $join->on('produtos.sku', 'movimentacao.sku');
+            })
+            ->where('movimentacao.sku', DB::raw("'$sku'"))
+            ->get();
+
+        return response()->json($result, 200, [], JSON_NUMERIC_CHECK);
+    }
 }
